@@ -4,6 +4,7 @@ import { Tasks } from './components/tasks/tasks';
 import { TaskDetail } from './components/task-detail/task-detail';
 import { Login } from './components/login/login';
 import { Register } from './components/register/register';
+import { AuthGuard } from './services/auth.guard';
 
 export const routes: Routes = [
   {
@@ -11,8 +12,8 @@ export const routes: Routes = [
     component: Shell,
     children: [
       { path: '', redirectTo: 'login', pathMatch: 'full' },
-      { path: 'tasks', component: Tasks },
-      { path: 'tasks/:id', component: TaskDetail },
+      { path: 'tasks', component: Tasks, canActivate: [AuthGuard] },
+      { path: 'tasks/:id', component: TaskDetail, canActivate: [AuthGuard] },
       { path: 'login', component: Login },
       { path: 'register', component: Register },
     ],
